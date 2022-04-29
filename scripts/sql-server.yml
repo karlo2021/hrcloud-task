@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+    persontracker:
+        container_name: persontracker
+        image: "mcr.microsoft.com/mssql/server"
+        environment:
+            SA_PASSWORD: "openSourceDb123"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "8000:1433"
