@@ -4,12 +4,13 @@
 
 using Microsoft.EntityFrameworkCore;
 
+using Business.Infrastructure;
 using Domain;
 using Persistence.Configuration;
 
 namespace Persistence;
 public class DatabaseContext
-    : DbContext
+    : DbContext, IPersonDatabaseContext, IContactDatabaseContext, IEmailAddressDatabaseContext
 {
     public DatabaseContext(DbContextOptions<DatabaseContext> options)
         : base(options)
