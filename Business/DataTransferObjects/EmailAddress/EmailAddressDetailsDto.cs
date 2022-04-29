@@ -4,7 +4,7 @@
 
 using System.Linq.Expressions;
 
-namespace Business.DataTransferObjects.EmailAddress;
+namespace Business.DataTransferObjects.Email;
 
 public class EmailAddressDetailsDto
 {
