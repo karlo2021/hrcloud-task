@@ -45,10 +45,11 @@ internal sealed partial class Startup
         service.AddScoped<IPersonViewService, PersonViewService>();
         service.AddControllers();
     }
-    public static void Configure(IApplicationBuilder app)
+    public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         _ = app.UseMiddleware<ExceptionMiddleware>();
         _ = app.UseRouting();
+
         _ = app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
