@@ -1,4 +1,4 @@
-// Startup.cs
+﻿// Startup.cs
 //
 // © 2021
 
@@ -45,10 +45,23 @@ internal sealed partial class Startup
         service.AddScoped<IPersonViewService, PersonViewService>();
         service.AddControllers();
     }
-    public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         _ = app.UseMiddleware<ExceptionMiddleware>();
         _ = app.UseRouting();
+
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            OnPrepareResponse = (context) =>
+            {
+                context.Context.Response.Headers["Cache-Control"] =
+                    _configuration["StaticFiles:Headers:Cache-Control"];
+                context.Context.Response.Headers["Pragma"] =
+                    _configuration["StaticFiles:Headers:Pragma"];
+                context.Context.Response.Headers["Expires"] =
+                    _configuration["StaticFiles:Headers:Expires"];
+            }
+        });
 
         _ = app.UseEndpoints(endpoints =>
         {
